@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">        
+      <a class="navbar-brand" href="#">Mapit!</a>
+    </div>     
+  </div>
+</nav>
+<div class="container-fluid">
+  <agm-map 
+  [latitude]="lat" 
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]=false
+  [zoomControl]=false
+  (mapClick)="mapClicked($event)"
+  >
+  <agm-marker 
+  *ngFor="let m of markers;let i = index"
+  (markerClick)="clickedMarker(m, i)"
+  [latitude]="m.lat" 
+  [longitude]="m.lng"
+  [markerDraggable] = "m.draggable"
+  (dragEnd)="markerDragEnd(m, $event)"  
+  >
+  <agm-info-window>
+    <strong>{{m.name}}</strong>
+  </agm-info-window>
+  </agm-marker>
+
+</agm-map>
+</div> 
